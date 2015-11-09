@@ -44,8 +44,8 @@
         <sqlMapGenerator targetPackage="map" targetProject="src/main/resources">
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="mapper" targetProject="src/main/java" type="XMLMAPPER">
-        </javaClientGenerator>
+        <!--<javaClientGenerator targetPackage="mapper" targetProject="src/main/java" type="XMLMAPPER">-->
+        <!--</javaClientGenerator>-->
 
 
         <table tableName="%">

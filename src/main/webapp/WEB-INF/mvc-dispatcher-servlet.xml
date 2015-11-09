@@ -18,6 +18,7 @@
 
     <mvc:resources mapping="/static/**" location="/static/"/>
 
+
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
     <!--<property name="prefix" value="/pages/"/>-->
     <!--<property name="suffix" value=".html"/>-->

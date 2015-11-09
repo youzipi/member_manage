@@ -2,18 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <!--开启扫面注解生成Bean-->
     <context:annotation-config/>
-    <!--设定扫描的根package-->
     <context:component-scan base-package="com"/>
 
 
@@ -29,8 +28,8 @@
     </bean>
 
 
-    <!--这一段是最重要的-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--连接池-->
         <property name="dataSource" ref="dataSource"/>
         <!--规定了扫描mapper文件的路径-->
         <property name="mapperLocations" value="classpath*:map/*.xml"/>
@@ -38,10 +37,15 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
+
 
     <!--这一段让我们的MapperInterface能够最终在Spring中生成Bean最后被AutoWired-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -52,4 +56,16 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <aop:aspectj-autoproxy/>
+    <bean id="doBeforeAspect" class="com.aspect.ControllerAspect"/>
+    <!--事务管理-->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--<tx:attributes>-->
+    <!--<tx:method name="select*" read-only="true"/>-->
+    <!--<tx:method name="find*" read-only="true"/>-->
+    <!--<tx:method name="get*" read-only="true"/>-->
+    <!--<tx:method name="*"/>-->
+    <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
 </beans>

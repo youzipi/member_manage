@@ -1,7 +1,9 @@
 package com.controller;
 
 import com.dao.UserDao;
-import com.service.UserService;
+import com.entity.User;
+import com.mapper.TestMapper;
+import com.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 
 /**
@@ -27,26 +31,29 @@ public class HomeController {
 
     @Autowired
     private UserDao userDao;
-
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
+    @Autowired
+    private TestMapper testMapper;
+//
+//    @Autowired
+//    private UserService userService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(ModelMap model) {
         model.addAttribute("message", "Welcome");
         model.addAttribute("counter", ++counter);
+        List<User> users = testMapper.selectAll();
+        System.out.println(users);
+        model.addAttribute("users", users);
         return "index";//返回index.jsp
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String welcome(@PathVariable String name, ModelMap model) {
-//        UserExample example = new UserExample();
-//        example.createCriteria().andNameEqualTo("youzipi");
-////        List<User> users = ;
-//        System.out.println(userDao.insertSelective(new User()));
-//        model.addAttribute("users",users.get(0).getName());
-        System.out.println(userService.getUsers());
+
+//        System.out.println(userService.getUsers());
         return "index";//返回index.jsp
     }
 }
