@@ -44,16 +44,14 @@ public class HomeController {
     public String welcome(ModelMap model) {
         model.addAttribute("message", "Welcome");
         model.addAttribute("counter", ++counter);
-        List<User> users = testMapper.selectAll();
-        System.out.println(users);
+        List<User> users = userMapper.selectAll();
         model.addAttribute("users", users);
-        return "index";//返回index.jsp
+        return "index";
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String welcome(@PathVariable String name, ModelMap model) {
 
-//        System.out.println(userService.getUsers());
-        return "index";//返回index.jsp
+        return "index";
     }
 }
