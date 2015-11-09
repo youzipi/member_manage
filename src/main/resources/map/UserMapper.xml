@@ -10,11 +10,11 @@
         <result column="id_card" property="idCard" jdbcType="CHAR"/>
         <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <select id="selectAll" resultType="User">
+    <select id="selectAll" resultMap="BaseResultMap">
         SELECT *
         FROM user
     </select>
-    <select id="selectById" parameterType="int" resultType="User">
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
         SELECT *
         FROM `user`
         WHERE id = #{id}

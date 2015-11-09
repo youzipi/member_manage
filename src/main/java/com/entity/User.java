@@ -73,4 +73,17 @@ public class User {
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                ", idCard='" + idCard + '\'' +
+                ", addTime=" + addTime.toString() +
+                '}';
+    }
 }
