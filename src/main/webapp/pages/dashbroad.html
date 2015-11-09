@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
-
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>balance</th>
+        <th>add_time</th>
+    </tr>
+    </thead>
+    <tbody>
+        #foreach( $!{user} in $!{users})
+        <tr>
+            <td>$!{user.id}</td>
+            <td>$!{user.name}</td>
+            <td>$!{user.balance}</td>
+            <td>$!{user.addTime}</td>
+        </tr>
+        #end
+    </tbody>
+</table>
 </body>
 </html>
