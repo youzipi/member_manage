@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
 
     private String password;
 
-    private Integer balance;
+    private BigDecimal balance;
 
     private String idCard;
 
@@ -49,11 +50,11 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -71,18 +72,5 @@ public class User {
 
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                ", idCard='" + idCard + '\'' +
-                ", addTime=" + addTime +
-                '}';
     }
 }

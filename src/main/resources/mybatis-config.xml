@@ -3,8 +3,11 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="User" type="com.entity.User"/>
+        <typeAlias alias="Admin" type="com.entity.Admin"/>
+        <typeAlias alias="Consumption" type="com.entity.Consumption"/>
+        <typeAlias alias="Machine" type="com.entity.Machine"/>
     </typeAliases>
     <!--<mappers>-->
-        <!--<mapper resource="map/UserMapper.xml"/>-->
+    <!--<mapper resource="map/UserMapper.xml"/>-->
     <!--</mappers>-->
 </configuration>  

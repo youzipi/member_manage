@@ -46,6 +46,13 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
+    <!--<bean id="userDao" class="com.dao.UserDao">-->
+    <!--<property name="sqlSession" ref="sqlSession"/>-->
+    <!--</bean>-->
+    <!--<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper"/>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
 
     <!--这一段让我们的MapperInterface能够最终在Spring中生成Bean最后被AutoWired-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
