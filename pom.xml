@@ -167,6 +167,17 @@
             <artifactId>velocity-tools</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.41</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>org.apache.commons</groupId>-->
             <!--<artifactId>commons-collections4</artifactId>-->
