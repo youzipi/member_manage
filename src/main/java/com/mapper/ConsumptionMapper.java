@@ -1,7 +1,7 @@
-package dao;
+package com.mapper;
 
-import entity.Consumption;
-import entity.ConsumptionExample;
+import com.entity.Consumption;
+import com.entity.ConsumptionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,7 @@
-package dao;
+package com.mapper;
 
-import entity.Admin;
-import entity.AdminExample;
+import com.entity.Admin;
+import com.entity.AdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

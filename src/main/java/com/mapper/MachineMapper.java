@@ -1,7 +1,7 @@
-package dao;
+package com.mapper;
 
-import entity.Machine;
-import entity.MachineExample;
+import com.entity.Machine;
+import com.entity.MachineExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
