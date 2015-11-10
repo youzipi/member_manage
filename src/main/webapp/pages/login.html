@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    #parse("layout/require_base.html")
+</head>
+<body>
+<div id="container">
+    #if($msg)
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            $msg
+        </div>
+    #end
+    <div id="main">
+        <form action="/u/login" method="post" id="user">
+        ##        <form action="/u/login" method="post" id="user" name="login_form" onsubmit="return processLogin(this)">
+            <div class="form-group">
+                <label for="name">用户名</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label for="pwd">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+            </div>
+            <button class="btn btn-primary" type="submit" id="submit">登陆</button>
+        ##            <button class="btn btn-primary" type="submit" id="submit">登陆</button>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    /**
+     *@密码加密
+     */
+    function processLogin() {
+        var pass = login_form.pass.value;
+        var hash = hex_sha1(pass);
+        console.log(hash);
+        loginForm.encodePass.value = hash;
+        return true;
+    }
+    function login() {
+        $("#submit").click(function () {
+            var name = $("#name").val();
+            var password = $("#pwd").val();
+            var data = JSON.stringify({
+                username: name,
+                password: password
+            });
+            console.log(data);
+            $.ajax({
+                url: '/u/login/',
+                type: "POST",
+                data: data,
+                cache: false,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    alert("Login success");
+                    window.location.href = "/dashbroad";
+                },
+                error: function (data) {
+                    console.log("ERROR");
+                    console.log(data);
+//                    alert("error");
+                    window.location.reload();
+                }
+            });
+            return false;//阻止刷新
+        });
+    }
+    $(function () {
+//        login();
+    });
+</script>
+</html>

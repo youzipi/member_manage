@@ -48,13 +48,15 @@ public class UserController extends BaseController {
         user.setPassword(password);
         User fullUser = userMapper.validate(user);
 
+        HttpSession session = request.getSession();
+
         if (fullUser != null) {
-            HttpSession session = request.getSession();
             session.setAttribute("user", fullUser);
             session.setAttribute("user_name", fullUser.getName());
             return redirect("/");
         } else {
-            System.out.println("user is not existed");
+//            System.out.println("user is not existed");
+            session.setAttribute("msg", "登录失败检查用户名,密码");
             return "login";
         }
     }
