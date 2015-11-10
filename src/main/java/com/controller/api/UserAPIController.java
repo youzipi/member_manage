@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.api;
 
 import com.entity.User;
 import com.google.gson.Gson;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * project_name:member_manage
@@ -29,6 +28,27 @@ public class UserAPIController {
         User user = userMapper.selectById(id);
         return new Gson().toJson(user);
 
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable Integer id) {
+        User user = userMapper.selectById(id);
+        return new Gson().toJson(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String add(@PathVariable Integer id) {
+        User user = userMapper.selectById(id);
+        return new Gson().toJson(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public String update(@PathVariable Integer id) {
+        User user = userMapper.selectById(id);
+        return new Gson().toJson(user);
     }
 
 }

@@ -5,11 +5,11 @@ import com.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 @EnableWebMvc
 @RequestMapping("/u")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     UserMapper userMapper;
 
@@ -37,6 +37,44 @@ public class UserController {
         User user = userMapper.selectById(id);
         map.addAttribute("users", user);
         return "user_info";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(HttpServletRequest request, ModelMap model) {
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        User fullUser = userMapper.validate(user);
+
+        if (fullUser != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", fullUser);
+            session.setAttribute("user_name", fullUser.getName());
+            return redirect("/");
+        } else {
+            System.out.println("user is not existed");
+            return "login";
+        }
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user_id");
+        session.removeAttribute("user_name");
+        return redirect("/");
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String add(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        HttpSession session = request.getSession();
+        session.removeAttribute("user_id");
+        session.removeAttribute("user_name");
+        return redirect("/");
     }
 
 }

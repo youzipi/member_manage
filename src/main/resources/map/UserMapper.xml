@@ -16,7 +16,16 @@
     </select>
     <select id="selectById" parameterType="int" resultMap="BaseResultMap">
         SELECT *
-        FROM `user`
+        FROM user
         WHERE id = #{id}
+    </select>
+    <select id="deleteById" parameterType="int" resultType="java.lang.Integer">
+        DELETE FROM user
+        WHERE id = #{id};
+    </select>
+    <select id="validate" parameterType="User" resultMap="BaseResultMap">
+        SELECT *
+        FROM user
+        WHERE user.name = #{name} AND user.password = #{password};
     </select>
 </mapper>
