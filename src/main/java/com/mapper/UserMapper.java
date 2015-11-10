@@ -15,4 +15,7 @@ public interface UserMapper {
     Integer delectById(int id);
 
     User validate(User user);
+
+
+    int insertSelective(User record);
 }

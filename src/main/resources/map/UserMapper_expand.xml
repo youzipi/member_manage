@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mapper.UserDao">
-
-
+<mapper namespace="com.mapper.UserMapper">
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT *
+        FROM user
+    </select>
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+    <select id="deleteById" parameterType="int" resultType="java.lang.Integer">
+        DELETE FROM user
+        WHERE id = #{id};
+    </select>
+    <select id="validate" parameterType="User" resultMap="BaseResultMap">
+        SELECT *
+        FROM user
+        WHERE user.name = #{name} AND user.password = #{password};
+    </select>
 </mapper>
