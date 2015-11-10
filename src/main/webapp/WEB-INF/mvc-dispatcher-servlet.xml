@@ -8,16 +8,16 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!--这一句处理对静态资源的访问-->
+    <!--静态资源的访问-->
     <mvc:default-servlet-handler/>
-    <!--这一句指定了扫描注解生成Controller的根包名-->
     <context:component-scan base-package="com.controller"/>
-    <!--这一句相当于开启注解扫描功能-->
+    <!--开启注解扫描功能-->
     <mvc:annotation-driven/>
     <!--<context:annotation-config/>-->
 
     <mvc:resources mapping="/static/**" location="/static/"/>
-
+    <mvc:view-controller path="/login/" view-name="login"/>
+    <!--/login无法匹配到视图 浏览器自动补全'/'?-->
 
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
     <!--<property name="prefix" value="/pages/"/>-->
@@ -45,9 +45,27 @@
           class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html;charset=utf-8"/>
-        <property name="cache" value="true"/>
+        <!--<property name="cache" value="true"/>-->
         <property name="prefix" value="/"/>
         <!--<property name="layoutUrl" value="/WEB-INF/velocity/layouts/layout.vm"/>-->
-        <!--<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>-->
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
     </bean>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<ref bean="jsonHttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="jsonHttpMessageConverter"-->
+          <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+        <!--<property name="supportedMediaTypes">-->
+            <!--<list>-->
+                <!--<value>application/json;charset=UTF-8</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
 </beans>
