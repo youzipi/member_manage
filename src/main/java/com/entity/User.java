@@ -83,7 +83,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
                 ", idCard='" + idCard + '\'' +
-                ", addTime=" + addTime.toString() +
+                ", addTime=" + addTime +
                 '}';
     }
 }

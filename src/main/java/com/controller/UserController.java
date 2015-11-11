@@ -43,12 +43,8 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, ModelMap model) {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
+    public String login(User user, HttpServletRequest request, ModelMap model) {
+        System.out.println(user);
         User fullUser = userService.validate(user);
 
         HttpSession session = request.getSession();
@@ -58,7 +54,6 @@ public class UserController extends BaseController {
             session.setAttribute("user_name", fullUser.getName());
             return redirect("/");
         } else {
-//            System.out.println("user is not existed");
             session.setAttribute("msg", "登录失败检查用户名,密码");
             return "login";
         }
@@ -67,22 +62,14 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.removeAttribute("user_id");
+        session.removeAttribute("user");
         session.removeAttribute("user_name");
         return redirect("/");
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String add(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String IdCard = request.getParameter("id_card");
-        String phone = request.getParameter("phone");
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        user.setIdCard(IdCard);
-        user.setPhone(phone);
+    public String add(User user) {
+        System.out.println(user);
         DateUtil.AddDate(user);
         userService.add(user);
 
