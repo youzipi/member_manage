@@ -9,11 +9,16 @@ package com.controller;
 public class BaseController {
 
     protected String redirect() {
-        return redirect("/");
+        return "redirect:/";
     }
 
     protected String redirect(String url) {
-        return "redirect:" + url;
+        StringBuilder builder = new StringBuilder();
+        builder.append("redirect:").append(url);
+        if (!url.substring(url.length() - 1).equals("/")) {
+            builder.append("/");
+        }
+        return builder.toString();
     }
 
 }
