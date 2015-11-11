@@ -1,10 +1,12 @@
 package com.service;
 
+import com.common.Page;
 import com.entity.User;
 import com.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,5 +34,16 @@ public class UserService {
 
     public User validate(User user) {
         return userMapper.validate(user);
+    }
+
+    public int count() {
+        return userMapper.count();
+    }
+
+    public List<User> getByPage(Page page) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("offset", (page.getNumber() - 1) * page.getSize());
+        map.put("limit", page.getSize());
+        return userMapper.selectByPage(map);
     }
 }

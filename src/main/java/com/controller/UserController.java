@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.common.DateUtil;
+import com.common.PageBuilder;
 import com.entity.User;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getAll(ModelMap map) {
-        List<User> users = userService.getAll();
-        map.addAttribute("users", users);
-        return "dashbroad";
+        return redirect("/u/p/1");
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -40,6 +39,21 @@ public class UserController extends BaseController {
         User user = userService.getById(id);
         map.addAttribute("users", user);
         return "user_info";
+    }
+
+    @RequestMapping(value = "/p/{page_num}", method = RequestMethod.GET)
+    public String getByPage(@PathVariable("page_num") Integer pageNum, ModelMap map) {
+        PageBuilder builder = new PageBuilder();
+        builder.number(pageNum);
+
+        List<User> users = userService.getByPage(builder.page());
+        int count = userService.count();
+        builder.total(count);
+
+
+        map.addAttribute("users", users);
+        map.addAttribute("page", builder.page());
+        return "dashbroad";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

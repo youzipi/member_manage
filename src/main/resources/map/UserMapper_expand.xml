@@ -19,4 +19,14 @@
         FROM user
         WHERE user.name = #{name} AND user.password = #{password};
     </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM user;
+    </select>
+    <select id="selectByPage" parameterType="HashMap" resultMap="BaseResultMap">
+        SELECT *
+        FROM user
+        LIMIT #{offset}, #{limit};
+    </select>
+
 </mapper>

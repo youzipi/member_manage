@@ -3,6 +3,7 @@ package com.mapper;
 import com.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -18,4 +19,8 @@ public interface UserMapper {
 
 
     int insertSelective(User record);
+
+    int count();
+
+    List<User> selectByPage(HashMap map);
 }
