@@ -7,7 +7,13 @@ package com.controller;
  * date: 15-11-10 下午7:14
  */
 public class BaseController {
+
+    protected String redirect() {
+        return redirect("/");
+    }
+
     protected String redirect(String url) {
         return "redirect:" + url;
     }
+
 }

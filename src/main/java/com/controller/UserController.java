@@ -52,7 +52,7 @@ public class UserController extends BaseController {
         if (fullUser != null) {
             session.setAttribute("user", fullUser);
             session.setAttribute("user_name", fullUser.getName());
-            return redirect("/");
+            return redirect();
         } else {
             session.setAttribute("msg", "登录失败检查用户名,密码");
             return "login";
@@ -64,7 +64,7 @@ public class UserController extends BaseController {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
         session.removeAttribute("user_name");
-        return redirect("/");
+        return redirect();
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -73,7 +73,7 @@ public class UserController extends BaseController {
         DateUtil.AddDate(user);
         userService.add(user);
 
-        return redirect("/");
+        return redirect();
     }
 
 }
