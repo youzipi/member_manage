@@ -50,8 +50,8 @@
     <!--<property name="sqlSession" ref="sqlSession"/>-->
     <!--</bean>-->
     <!--<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-        <!--<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper"/>-->
-        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper"/>-->
+    <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
     <!--</bean>-->
 
     <!--这一段让我们的MapperInterface能够最终在Spring中生成Bean最后被AutoWired-->
@@ -63,8 +63,13 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <aop:aspectj-autoproxy/>
-    <bean id="doBeforeAspect" class="com.aspect.ControllerAspect"/>
+    <!--<bean id="doBeforeAspect" class="com.aspect.ControllerAspect"/>-->
+    <bean class="com.aspect.ControllerAspect"/>
+    <!--<bean id="userController" class="com.controller.UserController"/>-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
     <!--事务管理-->
     <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
     <!--<tx:attributes>-->
@@ -74,5 +79,13 @@
     <!--<tx:method name="*"/>-->
     <!--</tx:attributes>-->
     <!--</tx:advice>-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+        <property name="basePackage" value="dao"/>
+    </bean>
+
+
+
 
 </beans>
