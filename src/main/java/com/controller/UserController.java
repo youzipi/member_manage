@@ -1,15 +1,19 @@
 package com.controller;
 
 import com.common.DateUtil;
+import com.common.LoginRequired;
 import com.common.PageBuilder;
 import com.entity.User;
 import com.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +32,8 @@ import java.util.List;
 public class UserController extends BaseController {
     @Autowired
     UserService userService;
+    Logger logger = Logger.getLogger(UserController.class);
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getAll(ModelMap map) {
@@ -41,8 +47,17 @@ public class UserController extends BaseController {
         return "user_info";
     }
 
+    @LoginRequired
     @RequestMapping(value = "/p/{page_num}", method = RequestMethod.GET)
-    public String getByPage(@PathVariable("page_num") Integer pageNum, ModelMap map) {
+    public String getByPage(@PathVariable("page_num") Integer pageNum, ModelMap model) {
+
+        logger.debug("getByPage....." + pageNum);
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+        if (session.getAttribute("user") == null) {
+            model.addAttribute("msg", "请登陆后操作");
+            return "login";
+        }
+
         PageBuilder builder = new PageBuilder();
         builder.number(pageNum);
 
@@ -51,11 +66,12 @@ public class UserController extends BaseController {
         builder.total(count);
 
 
-        map.addAttribute("users", users);
-        map.addAttribute("page", builder.page());
+        model.addAttribute("users", users);
+        model.addAttribute("page", builder.page());
         return "dashbroad";
     }
 
+    //    @LoginRequired
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, HttpServletRequest request, ModelMap model) {
         System.out.println(user);
@@ -66,13 +82,15 @@ public class UserController extends BaseController {
         if (fullUser != null) {
             session.setAttribute("user", fullUser);
             session.setAttribute("user_name", fullUser.getName());
-            return redirect();
+            request.setAttribute("hello", true);
+            return redirect("/u/");
         } else {
             session.setAttribute("msg", "登录失败检查用户名,密码");
             return "login";
         }
     }
 
+    @LoginRequired
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
