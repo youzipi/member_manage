@@ -2,7 +2,7 @@ package com.controller.api;
 
 import com.entity.User;
 import com.google.gson.Gson;
-import com.mapper.UserMapper;
+import com.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/v1/u")
 public class UserAPIController {
     @Autowired
-    UserMapper userMapper;
+    UserDao userMapper;
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -28,16 +28,13 @@ public class ControllerAspect {
     }
 
     @Around(value = "loginRequired()")
-    public String auth(ProceedingJoinPoint joinPoint) throws Throwable {
+    public String checkLogin(ProceedingJoinPoint joinPoint) throws Throwable {
 
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
         System.out.println("aspect======");
         if (session.getAttribute("user") != null) {
             return (String) joinPoint.proceed();
-//            return null;
         } else {
-//            .getModel().put("error", "unauthorised");
-//            return mav;
             return "login";
         }
 

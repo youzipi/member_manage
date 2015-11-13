@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.entity.User;
-import com.mapper.UserMapper;
+import com.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,12 +19,12 @@ import java.util.List;
 @RequestMapping("/")
 public class DashBroadController {
     @Autowired
-    UserMapper userMapper;
+    UserDao userMapper;
 
     @RequestMapping("/")
     public String index(ModelMap model) {
         List<User> users = userMapper.selectAll();
         model.addAttribute("users", users);
-        return "dashbroad";
+        return "index";
     }
 }
