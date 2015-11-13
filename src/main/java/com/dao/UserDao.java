@@ -1,14 +1,13 @@
 package com.dao;
 
+import com.common.BaseDao;
 import com.entity.User;
-import com.dao.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public interface UserDao extends UserMapper {
+public interface UserDao extends BaseDao<User> {
 
     List<User> selectAll();
 
@@ -18,7 +17,4 @@ public interface UserDao extends UserMapper {
 
     User validate(User user);
 
-    int count();
-
-    List<User> selectByPage(HashMap map);
 }

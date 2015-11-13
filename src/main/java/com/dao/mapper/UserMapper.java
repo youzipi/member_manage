@@ -3,9 +3,10 @@ package com.dao.mapper;
 import com.entity.User;
 import com.entity.UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface UserMapper {
     int countByExample(UserExample example);
 

@@ -15,6 +15,7 @@
             <th>name</th>
             <th>balance</th>
             <th>add_time</th>
+            <th>last_login</th>
         </tr>
         </thead>
         <tbody>
@@ -24,20 +25,12 @@
                 <td>$!{user.name}</td>
                 <td>$!{user.balance}</td>
                 <td>$!{user.addTime}</td>
+                <td>$!{user.updateTime}</td>
             </tr>
             #end
         </tbody>
     </table>
-##$page
-    <ul class="pagination">
-        #foreach($i in [1..$page.total])
-            #if($i == $page.number)
-                <li class="active"><a href="#">$i</a></li>
-            #else
-                <li><a href="/u/p/$i">$i</a></li>
-            #end
-        #end
-    </ul>
+    #parse("layout/pagination.html")
 </div>
 </body>
 </html>

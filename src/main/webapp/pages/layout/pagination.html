@@ -1,0 +1,10 @@
+##$page
+<ul class="pagination">
+  #foreach($i in [1..$page.total])
+    #if($i == $page.number)
+        <li class="active"><a href="#">$i</a></li>
+    #else
+        <li><a href="/u/p/$i">$i</a></li>
+    #end
+  #end
+</ul>

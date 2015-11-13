@@ -1,13 +1,13 @@
 package com.service;
 
 import com.common.Page;
+import com.common.PageUtil;
 import com.dao.UserDao;
 import com.dao.mapper.UserMapper;
 import com.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class UserService {
     UserMapper userMapper;
 
     public int add(User user) {
-        return userDao.insertSelective(user);
+        return userMapper.insertSelective(user);
     }
 
     public List<User> getAll() {
@@ -44,10 +44,7 @@ public class UserService {
     }
 
     public List<User> getByPage(Page page) {
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("offset", (page.getNumber() - 1) * page.getSize());
-        map.put("limit", page.getSize());
-        return userDao.selectByPage(map);
+        return userDao.selectByPage(PageUtil.page2map(page));
     }
 
     public int update(User user) {
