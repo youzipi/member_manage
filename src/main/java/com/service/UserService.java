@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User getById(Integer id) {
-        return userDao.selectById(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 
     public User validate(User user) {

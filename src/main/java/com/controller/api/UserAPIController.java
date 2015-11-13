@@ -2,7 +2,7 @@ package com.controller.api;
 
 import com.entity.User;
 import com.google.gson.Gson;
-import com.dao.UserDao;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,35 +20,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/v1/u")
 public class UserAPIController {
     @Autowired
-    UserDao userMapper;
+    UserService userService;
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getById(@PathVariable Integer id) {
-        User user = userMapper.selectById(id);
+        User user = userService.getById(id);
         return new Gson().toJson(user);
-
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public String delete(@PathVariable Integer id) {
-        User user = userMapper.selectById(id);
-        return new Gson().toJson(user);
+        return null;
     }
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String add(@PathVariable Integer id) {
-        User user = userMapper.selectById(id);
-        return new Gson().toJson(user);
+//        User user = userService.add(user);
+//        return new Gson().toJson(user);
+        return null;
     }
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public String update(@PathVariable Integer id) {
-        User user = userMapper.selectById(id);
-        return new Gson().toJson(user);
+        return null;
     }
 
 }
