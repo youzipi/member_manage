@@ -24,7 +24,7 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-        <property name="connectionProperties" value="${jdbc.prop}"/>
+        <!--<property name="connectionProperties" value="${jdbc.prop}"/>-->
     </bean>
 
 
@@ -38,7 +38,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.mapper"/>
+        <property name="basePackage" value="com.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -56,7 +56,7 @@
 
     <!--这一段让我们的MapperInterface能够最终在Spring中生成Bean最后被AutoWired-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.mapper"/>
+        <property name="basePackage" value="com.dao.mapper"/>
     </bean>
 
     <bean id="transactionManager"
