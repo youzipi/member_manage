@@ -15,6 +15,7 @@
     <!--/login无法匹配到视图 浏览器自动补全'/'?-->
     <mvc:view-controller path="/login/" view-name="login"/>
     <mvc:view-controller path="/register/" view-name="register"/>
+    <mvc:view-controller path="/index/" view-name="index"/>
 
     <!-- ViewResolver & View 映射关系 -->
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

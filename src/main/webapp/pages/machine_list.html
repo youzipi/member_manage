@@ -21,7 +21,13 @@
             <tr>
                 <td>$!{machine.id}</td>
                 <td>$!{machine.name}</td>
-                <td>$!{machine.status}</td>
+                <td>
+                    #if($!{machine.status})
+                        使用中
+                    #else
+                        空闲
+                    #end
+                </td>
             </tr>
             #end
         </tbody>
