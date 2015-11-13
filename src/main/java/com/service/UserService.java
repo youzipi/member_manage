@@ -2,6 +2,7 @@ package com.service;
 
 import com.common.Page;
 import com.dao.UserDao;
+import com.dao.mapper.UserMapper;
 import com.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserMapper userMapper;
 
     public int add(User user) {
         return userDao.insertSelective(user);
@@ -45,5 +48,9 @@ public class UserService {
         map.put("offset", (page.getNumber() - 1) * page.getSize());
         map.put("limit", page.getSize());
         return userDao.selectByPage(map);
+    }
+
+    public int update(User user) {
+        return userMapper.updateByPrimaryKey(user);
     }
 }

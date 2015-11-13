@@ -1,4 +1,4 @@
-package com.common;
+package com.common.annotation;
 
 /**
  * project_name:member_manage

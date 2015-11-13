@@ -1,11 +1,17 @@
 package com.aspect;
 
+import com.common.DateUtil;
+import com.entity.User;
+import com.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -21,10 +27,16 @@ import javax.servlet.http.HttpSession;
 @Aspect
 public class ControllerAspect {
     private static final Log log = LogFactory.getLog(ControllerAspect.class);
+    @Autowired
+    UserService userService;
 
     //    @Pointcut(value = "execution ( * com.controller.UserController.get*(..))")
-    @Pointcut(value = "@annotation( com.common.LoginRequired)")
+    @Pointcut(value = "@annotation( com.common.annotation.LoginRequired)")
     private void loginRequired() {
+    }
+
+    @Pointcut(value = "@annotation( com.common.annotation.Login)")
+    private void login() {
     }
 
     @Around(value = "loginRequired()")
@@ -38,5 +50,16 @@ public class ControllerAspect {
             return "login";
         }
 
+    }
+
+    @AfterReturning(pointcut = "login()", returning = "returnValue")
+    public void logined(JoinPoint joinPoint, String returnValue) throws Throwable {
+        if(!returnValue.equals("login")){
+            HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+            User user = (User) session.getAttribute("user");
+            user.getId();
+            DateUtil.updateTime(user);
+            userService.update(user);
+        }
     }
 }

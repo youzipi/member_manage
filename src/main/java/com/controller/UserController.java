@@ -1,7 +1,8 @@
 package com.controller;
 
 import com.common.DateUtil;
-import com.common.LoginRequired;
+import com.common.annotation.Login;
+import com.common.annotation.LoginRequired;
 import com.common.PageBuilder;
 import com.entity.User;
 import com.service.UserService;
@@ -71,7 +72,7 @@ public class UserController extends BaseController {
         return "dashbroad";
     }
 
-    //    @LoginRequired
+    @Login
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, HttpServletRequest request, ModelMap model) {
         logger.debug(user);
