@@ -1,22 +1,24 @@
 package com.dao;
 
 import com.entity.User;
-import org.apache.ibatis.session.SqlSession;
+import com.dao.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
-/**
- * project_name:member_manage
- * package_name:com.dao
- * user: youzipi
- * date: 15-11-9 下午5:20
- */
 @Repository
-public class UserDao {
-    private SqlSession sqlSession;
+public interface UserDao extends UserMapper {
 
-    public List<User> findAll() {
-        return this.sqlSession.selectList("find-all-farmers");
-    }
+    List<User> selectAll();
+
+    User selectById(int id);
+
+    Integer delectById(int id);
+
+    User validate(User user);
+
+    int count();
+
+    List<User> selectByPage(HashMap map);
 }

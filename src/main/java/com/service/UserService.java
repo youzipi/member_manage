@@ -1,8 +1,8 @@
 package com.service;
 
 import com.common.Page;
+import com.dao.UserDao;
 import com.entity.User;
-import com.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,32 +18,32 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    UserMapper userMapper;
+    UserDao userDao;
 
     public int add(User user) {
-        return userMapper.insertSelective(user);
+        return userDao.insertSelective(user);
     }
 
     public List<User> getAll() {
-        return userMapper.selectAll();
+        return userDao.selectAll();
     }
 
     public User getById(Integer id) {
-        return userMapper.selectById(id);
+        return userDao.selectById(id);
     }
 
     public User validate(User user) {
-        return userMapper.validate(user);
+        return userDao.validate(user);
     }
 
     public int count() {
-        return userMapper.count();
+        return userDao.count();
     }
 
     public List<User> getByPage(Page page) {
         HashMap<String, Integer> map = new HashMap<>();
         map.put("offset", (page.getNumber() - 1) * page.getSize());
         map.put("limit", page.getSize());
-        return userMapper.selectByPage(map);
+        return userDao.selectByPage(map);
     }
 }

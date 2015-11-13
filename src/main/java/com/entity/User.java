@@ -18,6 +18,8 @@ public class User {
 
     private Date addTime;
 
+    private Date updateTime;
+
     public Integer getId() {
         return id;
     }
@@ -74,16 +76,11 @@ public class User {
         this.addTime = addTime;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                ", idCard='" + idCard + '\'' +
-                ", addTime=" + addTime +
-                '}';
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
