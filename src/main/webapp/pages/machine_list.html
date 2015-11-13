@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    #parse("layout/require_base.html")
+</head>
+<body>
+    #parse("layout/navbar.html")
+<div id="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>status</th>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach( $!{machine} in $!{machines})
+            <tr>
+                <td>$!{machine.id}</td>
+                <td>$!{machine.name}</td>
+                <td>$!{machine.status}</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #parse("layout/pagination.html")
+</div>
+</body>
+</html>
