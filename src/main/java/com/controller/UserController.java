@@ -78,7 +78,7 @@ public class UserController extends BaseController {
             session.setAttribute("user", fullUser);
             session.setAttribute("user_name", fullUser.getName());
             session.setAttribute("hello", true);
-            return redirect("/u/");
+            return redirect("/index");
         } else {
             session.setAttribute("msg", "登录失败检查用户名,密码");
             return "login";

@@ -7,6 +7,8 @@ public class Machine {
 
     private Boolean status;
 
+    private Integer groupId;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Machine {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 }

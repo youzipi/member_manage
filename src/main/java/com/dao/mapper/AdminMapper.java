@@ -2,11 +2,9 @@ package com.dao.mapper;
 
 import com.entity.Admin;
 import com.entity.AdminExample;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-@Repository
+import org.apache.ibatis.annotations.Param;
+
 public interface AdminMapper {
     int countByExample(AdminExample example);
 

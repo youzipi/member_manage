@@ -2,11 +2,9 @@ package com.dao.mapper;
 
 import com.entity.Consumption;
 import com.entity.ConsumptionExample;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-@Repository
+import org.apache.ibatis.annotations.Param;
+
 public interface ConsumptionMapper {
     int countByExample(ConsumptionExample example);
 
