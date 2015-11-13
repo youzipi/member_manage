@@ -1,7 +1,8 @@
-package com.mapper;
+package com.service;
 
 import com.entity.User;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * user: youzipi
  * date: 15-11-9 下午7:17
  */
+@Repository
 public interface TestMapper {
     @Select("SELECT * FROM user")
     List<User> selectAll();

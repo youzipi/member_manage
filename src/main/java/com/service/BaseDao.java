@@ -1,4 +1,4 @@
-package com.mapper;
+package com.service;
 
 import org.apache.ibatis.annotations.Param;
 
