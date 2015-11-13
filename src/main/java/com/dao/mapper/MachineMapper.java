@@ -2,8 +2,9 @@ package com.dao.mapper;
 
 import com.entity.Machine;
 import com.entity.MachineExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MachineMapper {
     int countByExample(MachineExample example);

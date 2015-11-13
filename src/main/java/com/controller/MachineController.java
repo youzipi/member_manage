@@ -29,7 +29,7 @@ public class MachineController extends BaseController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getAll(ModelMap map) {
-        return redirect("/u/p/1");
+        return redirect("/m/p/1");
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class MachineController extends BaseController {
 
         model.addAttribute("machines", machines);
         model.addAttribute("page", builder.page());
-        return "dashbroad";
+        return "machine_list";
     }
 
 }
