@@ -27,7 +27,15 @@
     <!-- /.container-fluid -->
 </nav>
 ##todo 只在第一次进入页面时显示
-#if($request.get("hello"))
+##显示后清除session中的'hello'
+##==2015-11-12 21:07:10
+##velocity-tools对session的用法找不到
+##而且session取出来的值需要赋给一个变量才行
+###set($hello  = $session.get("hello"))
+##==2015-11-12 21:47:23
+##todo 移到js中处理
+##$hello
+#if($!session.getAttribute("hello"))
     #set($user = $session.get('user'))
 <div class="alert alert-info alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -35,6 +43,7 @@
     </button>
     welcome,$user.name,余额为$user.balance.
 </div>
+    $!session.removeAttribute("hello")
 #end
 
 

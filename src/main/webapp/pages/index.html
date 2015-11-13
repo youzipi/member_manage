@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    #parse("layout/require_base.html")
 </head>
 <body>
-<h3>Message:${message}</h3>
+    #parse("layout/navbar.html")
+<div id="container">
+    <div class="jumbotron">
+        <h1>会员管理系统</h1>
 
-<h3>Counter:${counter}</h3>
-<h3>Counter:$!{users}</h3>
-<h3>Users:$!msg</h3>
-    #set($num = 1)
-    ${num}+1
-    #if(${isLogin} == true)
-    <a href=""> Admin</a>
-    #else
-    <a href="">Login</a>
-    #end
+        <p>balabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabala</p>
+
+        <p><a class="btn btn-primary btn-lg" href="/login/" role="button">登陆</a></p>
+    </div>
+</div>
+
 
 </body>
 </html>
