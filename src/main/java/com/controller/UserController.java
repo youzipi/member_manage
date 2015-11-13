@@ -74,7 +74,7 @@ public class UserController extends BaseController {
     //    @LoginRequired
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, HttpServletRequest request, ModelMap model) {
-        System.out.println(user);
+        logger.debug(user);
         User fullUser = userService.validate(user);
 
         HttpSession session = request.getSession();
@@ -82,7 +82,7 @@ public class UserController extends BaseController {
         if (fullUser != null) {
             session.setAttribute("user", fullUser);
             session.setAttribute("user_name", fullUser.getName());
-            request.setAttribute("hello", true);
+            session.setAttribute("hello", true);
             return redirect("/u/");
         } else {
             session.setAttribute("msg", "登录失败检查用户名,密码");
@@ -90,7 +90,6 @@ public class UserController extends BaseController {
         }
     }
 
-    @LoginRequired
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -102,7 +101,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String add(User user) {
         System.out.println(user);
-        DateUtil.AddDate(user);
+        DateUtil.addTime(user);
         userService.add(user);
 
         return redirect();
