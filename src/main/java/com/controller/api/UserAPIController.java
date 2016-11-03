@@ -24,8 +24,15 @@ public class UserAPIController {
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getById(@PathVariable Integer id) {
-        User user = userService.getById(id);
+    public String info(@PathVariable Integer id) {
+        User user = userService.findById(id);
+        return new Gson().toJson(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(@PathVariable Integer id) {
+        User user = userService.findById(id);
         return new Gson().toJson(user);
     }
 

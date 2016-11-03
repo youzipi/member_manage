@@ -8,6 +8,5 @@
         <typeAlias alias="Machine" type="com.entity.Machine"/>
     </typeAliases>
     <!--<mappers>-->
-    <!--<mapper resource="map/UserMapper.xml"/>-->
     <!--</mappers>-->
 </configuration>  

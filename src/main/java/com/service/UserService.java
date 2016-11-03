@@ -5,6 +5,7 @@ import com.common.PageUtil;
 import com.dao.UserDao;
 import com.dao.mapper.UserMapper;
 import com.entity.User;
+import com.model.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class UserService {
         return userDao.selectAll();
     }
 
-    public User getById(Integer id) {
+    public User findById(Integer id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
@@ -43,11 +44,15 @@ public class UserService {
         return userDao.count();
     }
 
-    public List<User> getByPage(Page page) {
+    public List<User> find(UserForm form, Page page) {
         return userDao.selectByPage(PageUtil.page2map(page));
     }
 
     public int update(User user) {
         return userMapper.updateByPrimaryKey(user);
+    }
+
+    public List<User> findByPage(Page page) {
+        return null;
     }
 }

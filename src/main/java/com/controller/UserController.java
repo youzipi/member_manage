@@ -39,7 +39,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getById(@PathVariable Integer id, ModelMap map) {
-        User user = userService.getById(id);
+        User user = userService.findById(id);
         map.addAttribute("users", user);
         return "user_info";
     }
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
         PageBuilder builder = new PageBuilder();
         builder.number(pageNum);
 
-        List<User> users = userService.getByPage(builder.page());
+        List<User> users = userService.findByPage(builder.page());
         int count = userService.count();
         builder.total(count);
 

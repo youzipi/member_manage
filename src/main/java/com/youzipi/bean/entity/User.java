@@ -33,7 +33,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPhone() {
@@ -41,7 +41,7 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -49,7 +49,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public BigDecimal getBalance() {
@@ -65,7 +65,7 @@ public class User {
     }
 
     public void setIdCard(String idCard) {
-        this.idCard = idCard == null ? null : idCard.trim();
+        this.idCard = idCard;
     }
 
     public Date getCreateTime() {

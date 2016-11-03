@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    #parse("layout/require_base.html")
+    #parse("layout/require_base.vm")
 </head>
 <body>
-    #parse("layout/navbar.html")
+    #parse("layout/navbar.vm")
 <div id="container">
     <table class="table table-bordered">
         <thead>
@@ -30,7 +30,7 @@
             #end
         </tbody>
     </table>
-    #parse("layout/pagination.html")
+    #parse("layout/pagination.vm")
 </div>
 </body>
 </html>

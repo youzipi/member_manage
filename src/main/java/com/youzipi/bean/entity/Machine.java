@@ -20,7 +20,7 @@ public class Machine {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Boolean getStatus() {

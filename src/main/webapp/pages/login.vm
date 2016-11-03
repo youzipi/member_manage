@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    #parse("layout/require_base.html")
+    #parse("layout/require_base.vm")
 </head>
 <body>
 <div id="container">

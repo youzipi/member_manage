@@ -29,7 +29,7 @@
     </bean>
     <bean id="velocityViewResolver"
           class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-        <property name="suffix" value=".html"/>
+        <property name="suffix" value=".vm"/>
         <property name="contentType" value="text/html;charset=utf-8"/>
         <!--<property name="cache" value="true"/>-->
         <property name="prefix" value="/"/>

@@ -7,7 +7,7 @@
     <properties resource="generator.properties"/>
 
     <!--指定特定数据库的jdbc驱动jar包的位置 -->
-    <classPathEntry location="${jdbc.driverLocation}"/>
+    <classPathEntry location="${driver.class.path}"/>
 
     <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
@@ -22,35 +22,77 @@
 
 
         <!--jdbc的数据库连接 -->
-        <jdbcConnection driverClass="${jdbc.driverClass}"
+        <jdbcConnection driverClass="${jdbc.driver}"
                         connectionURL="${jdbc.url}"
                         userId="${jdbc.username}"
                         password="${jdbc.password}">
         </jdbcConnection>
 
-
-        <!--optional 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
-        true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal   -->
         <javaTypeResolver>
+            <!--
+          true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+          false：默认,
+              scale>0;length>18：使用BigDecimal;
+              scale=0;length[10,18]：使用Long；
+              scale=0;length[5,9]：使用Integer；
+              scale=0;length<5：使用Short；
+            -->
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.entity" targetProject="src/main/java">
-            <!-- 去除CHAR字段的空格 -->
-            <property name="trimStrings" value="true"/>
+        <javaModelGenerator targetPackage="${package.model}" targetProject="${target.project}">
+            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <property name="trimStrings" value="false"/>
+            <!-- for MyBatis3 / MyBatis3Simple
+        是否创建一个不可变的类，如果为true，
+        那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类
+            default:false
+            -->
+            <!--<property name="immutable" value="false"/>-->
+
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetPackage="map" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="${package.mapper.xml}" targetProject="${target.resources}">
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.dao.mapper" targetProject="src/main/java" type="XMLMAPPER">
+        <!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口
+      targetPackage/targetProject:同javaModelGenerator
+      type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：
+          1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
+          2，MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
+          3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
+      注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
+         -->
+        <javaClientGenerator
+                targetPackage="${package.mapper.java}"
+                targetProject="${target.project}"
+                type="XMLMAPPER">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+
+            <!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查
+            <property name="rootInterface" value=""/>
+             -->
         </javaClientGenerator>
 
+        <!--<table tableName="np_marketing_scope" domainObjectName="MarketingScope">-->
+        <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;KKK id可以不用指明&ndash;&gt;-->
+        <!--</table>-->
 
-        <table tableName="%">
-            <generatedKey column="id" sqlStatement="Mysql"/>
+        <table tableName="marketing" domainObjectName="Marketing">
         </table>
+        <!--<table tableName="np_marketing_scope" domainObjectName="MarketingScope">-->
+        <!--</table>-->
+        <!--<table tableName="%">-->
+        <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql"/>&ndash;&gt;-->
+        <!--</table>-->
 
+        <!--<table tableName="teacher" enableCountByExample="false"-->
+        <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+        <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <!-- context 中 子级节点顺序不可改 -->
     </context>
 </generatorConfiguration>

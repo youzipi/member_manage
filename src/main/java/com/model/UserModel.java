@@ -2,7 +2,7 @@ package com.model;
 
 import com.dao.UserDao;
 import com.entity.User;
-import com.mapper.UserMapper;
+import com.dao.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

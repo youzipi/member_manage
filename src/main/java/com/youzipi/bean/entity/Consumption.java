@@ -60,6 +60,6 @@ public class Consumption {
     }
 
     public void setFee(String fee) {
-        this.fee = fee == null ? null : fee.trim();
+        this.fee = fee;
     }
 }

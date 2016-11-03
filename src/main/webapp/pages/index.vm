@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    #parse("layout/require_base.html")
+    #parse("layout/require_base.vm")
 </head>
 <body>
-    #parse("layout/navbar.html")
+    #parse("layout/navbar.vm")
 <div id="container">
     <div class="jumbotron">
         <h1>会员管理系统</h1>

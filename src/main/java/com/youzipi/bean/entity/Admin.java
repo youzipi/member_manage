@@ -20,7 +20,7 @@ public class Admin {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPassword() {
@@ -28,6 +28,6 @@ public class Admin {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 }
