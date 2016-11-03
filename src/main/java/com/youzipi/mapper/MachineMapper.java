@@ -4,7 +4,9 @@ import com.youzipi.bean.entity.Machine;
 import com.youzipi.bean.entity.MachineExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MachineMapper {
     int countByExample(MachineExample example);
 

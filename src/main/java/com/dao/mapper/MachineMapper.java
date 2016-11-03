@@ -3,9 +3,10 @@ package com.dao.mapper;
 import com.entity.Machine;
 import com.entity.MachineExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface MachineMapper {
     int countByExample(MachineExample example);
 

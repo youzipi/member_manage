@@ -4,7 +4,9 @@ import com.youzipi.bean.entity.Admin;
 import com.youzipi.bean.entity.AdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdminMapper {
     int countByExample(AdminExample example);
 

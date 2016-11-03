@@ -4,7 +4,9 @@ import com.youzipi.bean.entity.Consumption;
 import com.youzipi.bean.entity.ConsumptionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ConsumptionMapper {
     int countByExample(ConsumptionExample example);
 

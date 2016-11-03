@@ -12,6 +12,18 @@
     <!--<result column="update_id" property="updateId" jdbcType="BIGINT"/>-->
     <!--</resultMap>-->
 
+    <!---
+    KKK
+    自定义SQL
+    特殊需求
+    性能优化
 
+    -->
+
+    <select id="selectByPage" parameterType="HashMap" resultMap="BaseResultMap">
+        SELECT *
+        FROM marketing
+        LIMIT #{offset}, #{limit};
+    </select>
 
 </mapper>

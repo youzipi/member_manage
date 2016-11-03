@@ -92,11 +92,11 @@ DROP TABLE IF EXISTS `marketing`;
 CREATE TABLE `marketing` (
   `marketing_id`   INT(11)     NOT NULL AUTO_INCREMENT,
   `marketing_name` VARCHAR(18) NOT NULL DEFAULT '',
-  `start_time`     CHAR(11)    NOT NULL DEFAULT '',
-  `end_time`       VARCHAR(16) NOT NULL DEFAULT '',
-  `create_time`    DATETIME    NOT NULL DEFAULT NOW(),
+  `start_time`     TIMESTAMP   NOT NULL,
+  `end_time`       TIMESTAMP   NOT NULL,
+  `create_time`    TIMESTAMP   NOT NULL,
   `create_id`      BIGINT(10)  NOT NULL DEFAULT 0,
-  `update_time`    DATETIME    NOT NULL DEFAULT NOW(),
+  `update_time`    TIMESTAMP   NOT NULL,
   `update_id`      BIGINT(10)  NOT NULL DEFAULT 0,
   PRIMARY KEY (`marketing_id`)
 )

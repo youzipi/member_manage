@@ -4,7 +4,9 @@ import com.youzipi.bean.entity.MarketingScope;
 import com.youzipi.bean.entity.MarketingScopeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MarketingScopeMapper {
     int countByExample(MarketingScopeExample example);
 

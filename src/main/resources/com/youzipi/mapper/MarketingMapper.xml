@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.Marketing" >
     <id column="marketing_id" property="marketingId" jdbcType="INTEGER" />
     <result column="marketing_name" property="marketingName" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="CHAR" />
-    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_id" property="createId" jdbcType="BIGINT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -107,8 +107,8 @@
     insert into marketing (marketing_id, marketing_name, start_time, 
       end_time, create_time, create_id, 
       update_time, update_id)
-    values (#{marketingId,jdbcType=INTEGER}, #{marketingName,jdbcType=VARCHAR}, #{startTime,jdbcType=CHAR}, 
-      #{endTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, 
+    values (#{marketingId,jdbcType=INTEGER}, #{marketingName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.youzipi.bean.entity.Marketing" >
@@ -147,10 +147,10 @@
         #{marketingName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
-        #{startTime,jdbcType=CHAR},
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        #{endTime,jdbcType=VARCHAR},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -182,10 +182,10 @@
         marketing_name = #{record.marketingName,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null" >
-        start_time = #{record.startTime,jdbcType=CHAR},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endTime != null" >
-        end_time = #{record.endTime,jdbcType=VARCHAR},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -208,8 +208,8 @@
     update marketing
     set marketing_id = #{record.marketingId,jdbcType=INTEGER},
       marketing_name = #{record.marketingName,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=CHAR},
-      end_time = #{record.endTime,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_id = #{record.createId,jdbcType=BIGINT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -225,10 +225,10 @@
         marketing_name = #{marketingName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=CHAR},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=VARCHAR},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -248,8 +248,8 @@
   <update id="updateByPrimaryKey" parameterType="com.youzipi.bean.entity.Marketing" >
     update marketing
     set marketing_name = #{marketingName,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=CHAR},
-      end_time = #{endTime,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_id = #{createId,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

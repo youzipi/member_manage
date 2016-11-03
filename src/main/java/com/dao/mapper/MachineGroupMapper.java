@@ -4,7 +4,9 @@ import com.entity.MachineGroup;
 import com.entity.MachineGroupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MachineGroupMapper {
     int countByExample(MachineGroupExample example);
 

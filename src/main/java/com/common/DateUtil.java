@@ -4,7 +4,7 @@ import com.entity.User;
 import org.apache.commons.lang.reflect.MethodUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * project_name:spring_demoss
@@ -44,7 +44,7 @@ public class DateUtil {
 
     public static void main(String[] aa) {
 
-        Date date = new Date((new java.util.Date()).getTime());
+        Date date = new Date((new Date()).getTime());
         System.out.println(date);
         String tagStr = "tag1 tag2  tag3";
         String[] tags = tagStr.split(" +");//按空白符切片
@@ -54,5 +54,17 @@ public class DateUtil {
         User user = new User();
         DateUtil.addTime(user);
         System.out.println(user);
+    }
+
+    public static Date min(Date date1, Date date2) {
+        if (date1 == null || date2 == null) {
+            return null;
+        }
+
+        if (date1.compareTo(date2) < 0) {
+            return date1;
+        } else {
+            return date2;
+        }
     }
 }
