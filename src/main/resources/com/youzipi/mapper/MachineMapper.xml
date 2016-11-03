@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dao.mapper.AdminMapper">
-  <resultMap id="BaseResultMap" type="com.entity.Admin">
+<mapper namespace="com.youzipi.mapper.MachineMapper">
+  <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.Machine">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="BIT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password
+    id, name, status
   </sql>
-  <select id="selectByExample" parameterType="com.entity.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youzipi.bean.entity.MachineExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,53 +81,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.entity.AdminExample">
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.youzipi.bean.entity.MachineExample">
+    delete from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.entity.Admin">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into admin (id, name, password
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.youzipi.bean.entity.Machine">
+    insert into machine (id, name, status)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.Admin">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into admin
+  <insert id="insertSelective" parameterType="com.youzipi.bean.entity.Machine">
+    insert into machine
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
-      <if test="password != null">
-        password,
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.entity.AdminExample" resultType="java.lang.Integer">
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.youzipi.bean.entity.MachineExample" resultType="java.lang.Integer">
+    select count(*) from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update admin
+    update machine
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -135,8 +131,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -144,18 +140,18 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update admin
+    update machine
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <resultMap id="BaseResultMap" type="com.entity.Admin">
+  <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.Machine">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="BIT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -216,15 +212,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password
+    id, name, status
   </sql>
-  <select id="selectByExample" parameterType="com.entity.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youzipi.bean.entity.MachineExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -232,53 +228,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.entity.AdminExample">
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.youzipi.bean.entity.MachineExample">
+    delete from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.entity.Admin">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into admin (id, name, password
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.youzipi.bean.entity.Machine">
+    insert into machine (id, name, status)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.Admin">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into admin
+  <insert id="insertSelective" parameterType="com.youzipi.bean.entity.Machine">
+    insert into machine
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
-      <if test="password != null">
-        password,
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.entity.AdminExample" resultType="java.lang.Integer">
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.youzipi.bean.entity.MachineExample" resultType="java.lang.Integer">
+    select count(*) from machine
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update admin
+    update machine
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -286,8 +278,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -295,10 +287,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update admin
+    update machine
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

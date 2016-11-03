@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youzipi.mapper.MarketingScopeMapper" >
+  <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.MarketingScope" >
+    <id column="marketing_scope_id" property="marketingScopeId" jdbcType="BIGINT" />
+    <result column="marketing_id" property="marketingId" jdbcType="BIGINT" />
+    <result column="scope_id" property="scopeId" jdbcType="BIGINT" />
+    <result column="scope_type" property="scopeType" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    marketing_scope_id, marketing_id, scope_id, scope_type, create_time, update_time, 
+    flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.youzipi.bean.entity.MarketingScopeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from np_marketing_scope
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from np_marketing_scope
+    where marketing_scope_id = #{marketingScopeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from np_marketing_scope
+    where marketing_scope_id = #{marketingScopeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youzipi.bean.entity.MarketingScopeExample" >
+    delete from np_marketing_scope
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youzipi.bean.entity.MarketingScope" >
+    insert into np_marketing_scope (marketing_scope_id, marketing_id, scope_id, 
+      scope_type, create_time, update_time, 
+      flag)
+    values (#{marketingScopeId,jdbcType=BIGINT}, #{marketingId,jdbcType=BIGINT}, #{scopeId,jdbcType=BIGINT}, 
+      #{scopeType,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{flag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youzipi.bean.entity.MarketingScope" >
+    insert into np_marketing_scope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="marketingScopeId != null" >
+        marketing_scope_id,
+      </if>
+      <if test="marketingId != null" >
+        marketing_id,
+      </if>
+      <if test="scopeId != null" >
+        scope_id,
+      </if>
+      <if test="scopeType != null" >
+        scope_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="marketingScopeId != null" >
+        #{marketingScopeId,jdbcType=BIGINT},
+      </if>
+      <if test="marketingId != null" >
+        #{marketingId,jdbcType=BIGINT},
+      </if>
+      <if test="scopeId != null" >
+        #{scopeId,jdbcType=BIGINT},
+      </if>
+      <if test="scopeType != null" >
+        #{scopeType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youzipi.bean.entity.MarketingScopeExample" resultType="java.lang.Integer" >
+    select count(*) from np_marketing_scope
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update np_marketing_scope
+    <set >
+      <if test="record.marketingScopeId != null" >
+        marketing_scope_id = #{record.marketingScopeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.marketingId != null" >
+        marketing_id = #{record.marketingId,jdbcType=BIGINT},
+      </if>
+      <if test="record.scopeId != null" >
+        scope_id = #{record.scopeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.scopeType != null" >
+        scope_type = #{record.scopeType,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update np_marketing_scope
+    set marketing_scope_id = #{record.marketingScopeId,jdbcType=BIGINT},
+      marketing_id = #{record.marketingId,jdbcType=BIGINT},
+      scope_id = #{record.scopeId,jdbcType=BIGINT},
+      scope_type = #{record.scopeType,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      flag = #{record.flag,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youzipi.bean.entity.MarketingScope" >
+    update np_marketing_scope
+    <set >
+      <if test="marketingId != null" >
+        marketing_id = #{marketingId,jdbcType=BIGINT},
+      </if>
+      <if test="scopeId != null" >
+        scope_id = #{scopeId,jdbcType=BIGINT},
+      </if>
+      <if test="scopeType != null" >
+        scope_type = #{scopeType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+    </set>
+    where marketing_scope_id = #{marketingScopeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youzipi.bean.entity.MarketingScope" >
+    update np_marketing_scope
+    set marketing_id = #{marketingId,jdbcType=BIGINT},
+      scope_id = #{scopeId,jdbcType=BIGINT},
+      scope_type = #{scopeType,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=CHAR}
+    where marketing_scope_id = #{marketingScopeId,jdbcType=BIGINT}
+  </update>
+</mapper>

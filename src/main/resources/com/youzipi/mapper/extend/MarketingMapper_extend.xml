@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youzipi.mapper.MarketingMapper">
+    <!--<resultMap id="BaseResultMap" type="com.youzipi.bean.entity.Marketing">-->
+    <!--<id column="marketing_id" property="marketingId" jdbcType="INTEGER"/>-->
+    <!--<result column="marketing_name" property="marketingName" jdbcType="VARCHAR"/>-->
+    <!--<result column="start_time" property="startTime" jdbcType="CHAR"/>-->
+    <!--<result column="end_time" property="endTime" jdbcType="VARCHAR"/>-->
+    <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>-->
+    <!--<result column="create_id" property="createId" jdbcType="BIGINT"/>-->
+    <!--<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>-->
+    <!--<result column="update_id" property="updateId" jdbcType="BIGINT"/>-->
+    <!--</resultMap>-->
+
+
+
+</mapper>

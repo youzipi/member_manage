@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.entity.User">
+<mapper namespace="com.youzipi.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="balance" jdbcType="DECIMAL" property="balance" />
     <result column="id_card" jdbcType="CHAR" property="idCard" />
-    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,9 +70,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, password, balance, id_card, add_time, update_time
+    id, name, phone, password, balance, id_card, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youzipi.bean.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,30 +96,26 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.entity.UserExample">
+  <delete id="deleteByExample" parameterType="com.youzipi.bean.entity.UserExample">
     delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.entity.User">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insert" parameterType="com.youzipi.bean.entity.User">
     insert into user (id, name, phone, 
       password, balance, id_card, 
-      add_time, update_time)
+      create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
       #{password,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{idCard,jdbcType=CHAR}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.User">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insertSelective" parameterType="com.youzipi.bean.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
@@ -135,15 +131,17 @@
       <if test="idCard != null">
         id_card,
       </if>
-      <if test="addTime != null">
-        add_time,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="updateTime != null">
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -159,15 +157,15 @@
       <if test="idCard != null">
         #{idCard,jdbcType=CHAR},
       </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.entity.UserExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.youzipi.bean.entity.UserExample" resultType="java.lang.Integer">
     select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -194,8 +192,8 @@
       <if test="record.idCard != null">
         id_card = #{record.idCard,jdbcType=CHAR},
       </if>
-      <if test="record.addTime != null">
-        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -213,13 +211,13 @@
       password = #{record.password,jdbcType=VARCHAR},
       balance = #{record.balance,jdbcType=DECIMAL},
       id_card = #{record.idCard,jdbcType=CHAR},
-      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.youzipi.bean.entity.User">
     update user
     <set>
       <if test="name != null">
@@ -237,8 +235,8 @@
       <if test="idCard != null">
         id_card = #{idCard,jdbcType=CHAR},
       </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -246,25 +244,25 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.entity.User">
+  <update id="updateByPrimaryKey" parameterType="com.youzipi.bean.entity.User">
     update user
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
       password = #{password,jdbcType=VARCHAR},
       balance = #{balance,jdbcType=DECIMAL},
       id_card = #{idCard,jdbcType=CHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <resultMap id="BaseResultMap" type="com.entity.User">
+  <resultMap id="BaseResultMap" type="com.youzipi.bean.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="balance" jdbcType="DECIMAL" property="balance" />
     <result column="id_card" jdbcType="CHAR" property="idCard" />
-    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -326,9 +324,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, password, balance, id_card, add_time, update_time
+    id, name, phone, password, balance, id_card, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youzipi.bean.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -352,30 +350,26 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.entity.UserExample">
+  <delete id="deleteByExample" parameterType="com.youzipi.bean.entity.UserExample">
     delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.entity.User">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insert" parameterType="com.youzipi.bean.entity.User">
     insert into user (id, name, phone, 
       password, balance, id_card, 
-      add_time, update_time)
+      create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
       #{password,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{idCard,jdbcType=CHAR}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.User">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insertSelective" parameterType="com.youzipi.bean.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
@@ -391,15 +385,17 @@
       <if test="idCard != null">
         id_card,
       </if>
-      <if test="addTime != null">
-        add_time,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="updateTime != null">
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -415,15 +411,15 @@
       <if test="idCard != null">
         #{idCard,jdbcType=CHAR},
       </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.entity.UserExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.youzipi.bean.entity.UserExample" resultType="java.lang.Integer">
     select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -450,8 +446,8 @@
       <if test="record.idCard != null">
         id_card = #{record.idCard,jdbcType=CHAR},
       </if>
-      <if test="record.addTime != null">
-        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -469,13 +465,13 @@
       password = #{record.password,jdbcType=VARCHAR},
       balance = #{record.balance,jdbcType=DECIMAL},
       id_card = #{record.idCard,jdbcType=CHAR},
-      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.youzipi.bean.entity.User">
     update user
     <set>
       <if test="name != null">
@@ -493,8 +489,8 @@
       <if test="idCard != null">
         id_card = #{idCard,jdbcType=CHAR},
       </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -502,14 +498,14 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.entity.User">
+  <update id="updateByPrimaryKey" parameterType="com.youzipi.bean.entity.User">
     update user
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
       password = #{password,jdbcType=VARCHAR},
       balance = #{balance,jdbcType=DECIMAL},
       id_card = #{idCard,jdbcType=CHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
