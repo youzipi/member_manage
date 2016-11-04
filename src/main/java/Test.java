@@ -26,5 +26,10 @@ public class Test {
 
         // Spring
         BeanUtils.copyProperties(b,c);
+
+
+        String slist = "101";
+        char[] chars = slist.toCharArray();
+        System.out.println();
     }
 }

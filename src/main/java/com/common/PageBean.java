@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * Created by youzipi on 16/11/3.
  */
-@Data
 public class PageBean<T> {
     // 符合条件的记录总数
     private Integer rows;
@@ -35,4 +34,108 @@ public class PageBean<T> {
     private int endRowNum;
 
     private List<T> list;
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(int pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public int getPrePageNo() {
+        return prePageNo;
+    }
+
+    public void setPrePageNo(int prePageNo) {
+        this.prePageNo = prePageNo;
+    }
+
+    public int getNextPageNo() {
+        return nextPageNo;
+    }
+
+    public void setNextPageNo(int nextPageNo) {
+        this.nextPageNo = nextPageNo;
+    }
+
+    public int getFirstPageNo() {
+        return firstPageNo;
+    }
+
+    public void setFirstPageNo(int firstPageNo) {
+        this.firstPageNo = firstPageNo;
+    }
+
+    public int getLastPageNo() {
+        return lastPageNo;
+    }
+
+    public void setLastPageNo(int lastPageNo) {
+        this.lastPageNo = lastPageNo;
+    }
+
+    public int getStartNo() {
+        return startNo;
+    }
+
+    public void setStartNo(int startNo) {
+        this.startNo = startNo;
+    }
+
+    public int getEndNo() {
+        return endNo;
+    }
+
+    public void setEndNo(int endNo) {
+        this.endNo = endNo;
+    }
+
+    public int getStartRowNum() {
+        return startRowNum;
+    }
+
+    public void setStartRowNum(int startRowNum) {
+        this.startRowNum = startRowNum;
+    }
+
+    public int getEndRowNum() {
+        return endRowNum;
+    }
+
+    public void setEndRowNum(int endRowNum) {
+        this.endRowNum = endRowNum;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
 }

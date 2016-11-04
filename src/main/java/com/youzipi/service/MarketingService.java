@@ -1,9 +1,9 @@
 package com.youzipi.service;
 
-import com.common.DateUtil;
 import com.common.PageBean;
 import com.github.pagehelper.PageHelper;
-import com.youzipi.bean.MarketingForm;
+import com.github.pagehelper.PageInfo;
+import com.youzipi.form.MarketingForm;
 import com.youzipi.bean.entity.Marketing;
 import com.youzipi.bean.entity.MarketingExample;
 import com.youzipi.mapper.MarketingMapper;
@@ -11,6 +11,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,25 +37,46 @@ public class MarketingService {
     }
 
     public int destory(Integer id) {
-        Marketing marketing = new Marketing();
-        marketing.setMarketingId(id);
-//        marketing.setDelFlag("1");
-        return mapper.updateByPrimaryKeySelective(marketing);
+        destory(Arrays.asList(new Integer[]{id});
     }
 
-    public PageBean<Marketing> findByIdAndCreatId(int id, Long createId, PageBean<Marketing> pageBean) {
-        PageHelper.startPage(pageBean.getPageNo(), pageBean.getPageSize());
-        
-        MarketingExample example = new MarketingExample();
-        example.createCriteria()
-                .andMarketingIdEqualTo(id)
-                .andCreateIdEqualTo(createId);
-        
-        List<Marketing> marketings = mapper.selectByExample(example);
-        int count = mapper.countByExample(example);
-        pageBean.setList(marketings);
+    public int destory(Integer[] ids) {
+        Marketing marketing = new Marketing();
+//        marketing.setDelFlag("1");
 
-        return pageBean;
+        MarketingExample example = new MarketingExample();
+        example.createCriteria().andMarketingIdIn(Arrays.asList(ids));
+
+        return mapper.updateByExample(marketing,example);
+    }
+
+    public PageInfo<Marketing> findByIdAndCreatId(int id, Long createId, PageInfo<Marketing> pageForm) {
+        PageHelper.startPage(pageForm.getPageNum(), pageForm.getPageSize());
+
+        MarketingExample ex = new MarketingExample();
+
+        MarketingExample.Criteria criteria = ex.createCriteria()
+                .andMarketingIdEqualTo(id) //        eq('marketingId',marketingId)
+
+                .andCreateIdEqualTo(createId)
+                .andCreateIdIn(new ArrayList<Long>());
+
+
+
+        MarketingExample.Criteria criteria2 = ex.createCriteria()
+                .andCreateIdIn(new ArrayList<Long>());
+
+        ex.or(criteria);
+        ex.or(criteria2);
+        ex.setDistinct(true);
+        ex.setOrderByClause("create_time");
+
+
+
+        List<Marketing> marketings = mapper.selectByExample(ex);
+        PageInfo<Marketing> pageInfo = new PageInfo<>(marketings);
+
+        return pageInfo;
 
     }
 
@@ -106,7 +129,7 @@ public class MarketingService {
         Date startTime = form.getStartTime();
         Date endTime = form.getEndTime();
         if (startTime != null) {
-            criteria.andStartTimeLessThanOrEqualTo(startTime);
+            criteria.andStartTimeLessThanOrEqualTo(startTime); // le('startTime',startTime);
         }
         if (endTime != null) {
             criteria.andEndTimeGreaterThanOrEqualTo(endTime);

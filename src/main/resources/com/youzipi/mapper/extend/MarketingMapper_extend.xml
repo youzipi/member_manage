@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.youzipi.mapper.MarketingMapper">
+
     <!--<resultMap id="BaseResultMap" type="com.youzipi.bean.entity.Marketing">-->
     <!--<id column="marketing_id" property="marketingId" jdbcType="INTEGER"/>-->
     <!--<result column="marketing_name" property="marketingName" jdbcType="VARCHAR"/>-->
@@ -19,11 +21,72 @@
     性能优化
 
     -->
+    <sql id="baseCols">
 
-    <select id="selectByPage" parameterType="HashMap" resultMap="BaseResultMap">
-        SELECT *
-        FROM marketing
-        LIMIT #{offset}, #{limit};
+    </sql>
+
+    <sql id="detailCols">
+
+    </sql>
+
+    <sql id="baseWhereSql">
+
+    </sql>
+
+    <select id="pageMarketing" parameterType="markeingForm" resultMap="BaseResultMap">
+         <include refid="common.headSql"/>
+        SELECT
+        <include refid="baseCols"/>
+        FROM marketing WHERE  1=1
+        <include refid="baseWhereSql"/>
+
+        <if test=" != null and != ''">
+            order by ${orderCols}
+            <if test="">
+                ${orderDesc}
+            </if>
+
+        </if>
+        <include refid="common.footSql"/>
     </select>
 
+    <select id="queryMarketing" parameterType="markeingForm" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseCols"/>
+        FROM marketing WHERE 1=1
+        <include refid="baseWhereSql"/>
+
+        <if test=" != null and != ''">
+            order by ${orderCols}
+            <if test="">
+                ${orderDesc}
+            </if>
+        </if>
+    </select>
+
+    <insert id="" ></insert>
+
+    <update id=""></update>
+
+    <delete id="" parameterType="markeingForm">
+       UPDATE  np_marketing set f_status= 0 where id in (
+
+       <foreach collection="list" item="item" separator=",">
+           #{item}
+       </foreach>
+
+       )
+
+    </delete>
+
+    <select id="countMarting" resultType="int" parameterType="markeingForm">
+        SELECT  count(1)
+        FROM marketing WHERE  1=1
+        <include refid="baseWhereSql"/>
+    </select>
+
+
+    <select id="validateSql" parameterType="java.util.HashMap">
+
+    </select>
 </mapper>

@@ -1,13 +1,11 @@
 package com.youzipi.controller;
 
 import com.common.PageBean;
-import com.google.gson.Gson;
-import com.youzipi.bean.MarketingForm;
+import com.youzipi.form.MarketingForm;
 import com.youzipi.bean.entity.Marketing;
 import com.youzipi.service.MarketingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
