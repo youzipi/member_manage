@@ -38,7 +38,7 @@ public class MarketingService {
         Marketing marketing = new Marketing();
         marketing.setMarketingId(id);
 //        marketing.setDelFlag("1");
-        return mapper.updateByPrimaryKey(marketing);
+        return mapper.updateByPrimaryKeySelective(marketing);
     }
 
     public PageBean<Marketing> findByIdAndCreatId(int id, Long createId, PageBean<Marketing> pageBean) {
@@ -50,6 +50,7 @@ public class MarketingService {
                 .andCreateIdEqualTo(createId);
         
         List<Marketing> marketings = mapper.selectByExample(example);
+        int count = mapper.countByExample(example);
         pageBean.setList(marketings);
 
         return pageBean;

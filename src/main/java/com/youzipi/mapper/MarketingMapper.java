@@ -1,5 +1,6 @@
 package com.youzipi.mapper;
 
+import com.common.PageBean;
 import com.youzipi.bean.entity.Marketing;
 import com.youzipi.bean.entity.MarketingExample;
 import java.util.List;
@@ -29,4 +30,5 @@ public interface MarketingMapper {
     int updateByPrimaryKeySelective(Marketing record);
 
     int updateByPrimaryKey(Marketing record);
+    int selectByPage(PageBean pb);
 }

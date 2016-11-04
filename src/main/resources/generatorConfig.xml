@@ -82,6 +82,7 @@
         <!--</table>-->
 
         <table tableName="marketing" domainObjectName="Marketing">
+            <columnOverride jdbcType="DATETIME" javaType="java.util.Date"/>
         </table>
         <!--<table tableName="np_marketing_scope" domainObjectName="MarketingScope">-->
         <!--</table>-->
